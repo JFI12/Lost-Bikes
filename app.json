@@ -1,0 +1,56 @@
+{
+  "expo": {
+    "name": "Donewithit",
+    "slug": "Donewithit",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/personphonebike.jpg",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "SKAdNetworkItems": [
+          {
+            "SKAdNetworkIdentifier": "v9wttpbfk9.skadnetwork"
+          },
+          {
+            "SKAdNetworkIdentifier": "n38lu8286q.skadnetwork"
+          }
+        ]
+      },
+      "bundleIdentifier": "stolenbikes"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "permissions": [
+        "android.permission.INTERNET"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-build-properties",
+      "react-native-fbsdk-next"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "eedb8997-2d4e-4aaa-ae65-f6e8e748cabd"
+      }
+    }
+  }
+}
