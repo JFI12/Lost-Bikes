@@ -4,8 +4,7 @@ import { TouchableOpacity  } from 'react-native';
 import Navbar from "./Navbar"
 import { Linking } from 'react-native';
 import logo from "./images/logo.jpg";
-import skyrimman from "./images/skyrimman.jpg";
-import Theif from "./images/theif.jpg";
+
 import { NavigationContainer } from '@react-navigation/native';
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import firebase from "firebase/compat/app";
@@ -309,7 +308,6 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-      image: "./images/skyrimman.jpg",
       position: 'relative',
     },
 

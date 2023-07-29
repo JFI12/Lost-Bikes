@@ -9,8 +9,6 @@ import {ImageBackground, Image, SafeAreaView, StatusBar, Button, Alert, TextInpu
 import Navbar from "./Navbar"
 import { Linking } from 'react-native';
 import logo from "./images/logo.jpg";
-import skyrimman from "./images/skyrimman.jpg";
-import Theif from "./images/theif.jpg";
 import { NavigationContainer } from '@react-navigation/native';
 import { getStorage, uploadBytes,ref,getDownloadURL } from "firebase/storage";
 import { onValue, set, update, remove } from "firebase/database";
@@ -124,13 +122,13 @@ const SearchforBikeinFirebaseModel = async()=>{
 
 
     if (firstModelsearch && searchModeltext.length>1){
+
     setFirstModelsearch(false)
 
-    console.log("startafter: " + ModelStartAfter)
     const model_postsData = await fetchModelPosts(ModelStartAfter, postsPerLoad );
 
     setModelStartAfter(model_postsData.model_lastVisible )
-
+    console.log("startafter: " + ModelStartAfter)
     setModelPosts([...modelPosts, ...model_postsData.modelPosts]);
     console.log("modeposts" + model_postsData.modelPosts)
 /*     model_postsData.modelPosts.length==0? setLastModelPost(true):setLastModelPost(false);

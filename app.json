@@ -1,18 +1,19 @@
 {
   "expo": {
-    "name": "Donewithit",
+    "name": "Lost Bikes",
     "slug": "Donewithit",
-    "version": "1.0.0",
+    "version": "1.1.6",
     "orientation": "portrait",
-    "icon": "./assets/personphonebike.jpg",
+    "icon": "./assets/icon2.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/iconsplashtext.png", 
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/eedb8997-2d4e-4aaa-ae65-f6e8e748cabd"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -33,24 +34,34 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon2.png",
         "backgroundColor": "#FFFFFF"
       },
       "permissions": [
         "android.permission.INTERNET"
-      ]
+      ],
+      "package": "com.jfi123.Donewithit"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/iconsplashtext.png"
     },
     "plugins": [
-      "expo-build-properties",
-      "react-native-fbsdk-next"
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
     ],
     "extra": {
       "eas": {
         "projectId": "eedb8997-2d4e-4aaa-ae65-f6e8e748cabd"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }

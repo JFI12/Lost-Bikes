@@ -9,7 +9,6 @@ import Navbar from "./Navbar"
 import { Linking } from 'react-native';
 import logo from "./images/logo.jpg";
 import dogguard from "./images/dogguard.jpg";
-import Theif from "./images/theif.jpg";
 import personphonebike2 from "./images/personphonebike.jpg";
 import { NavigationContainer } from '@react-navigation/native';
 import { getStorage, ref, uploadBytes } from "firebase/storage";
@@ -36,15 +35,15 @@ import { AsyncStorage } from 'react-native';
 const ProfileScreen = ({ navigation, route }) => {
 
  /*    AsyncStorage.setItem("keepLoggedIn", JSON.stringify(true)) */
-    const data =     AsyncStorage.getItem("keepLoggedIn")
+/*     const data =     AsyncStorage.getItem("keepLoggedIn")
 
-    console.log("profile:"+ data )
+    console.log("profile:"+ data ) */
  
     const setasynclogout = async()=>{
-        AsyncStorage.setItem("keepLoggedIn", "")  
+/*         AsyncStorage.setItem("keepLoggedIn", "")  
         const data = await AsyncStorage.getItem('keepLoggedIn')
 
-        console.log("if true" + data)
+        console.log("if true" + data) */
         navigation.replace("Login"),1000
         
 
@@ -91,6 +90,27 @@ const ProfileScreen = ({ navigation, route }) => {
     const handleValuableInfo = () => {
         navigation.replace("ValuableInfo")
     }
+
+    const handleDeleteUser = () => {
+        firebase.auth().currentUser.delete()
+        handleSignOut()
+    }
+
+    const deleteUserAlert = () =>
+    Alert.alert(
+      "Do you want to delete this account?",
+      "Bikes uploaded will not be automatically deleted",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => handleDeleteUser() }
+      ]
+    );
+
+
     
 /*     ComponentDidMount=() => {
         const reference = database().ref("/User");
@@ -184,8 +204,9 @@ return(
 
         <View style={{fontSize: 25, marginTop: 20}}> 
             <Text style={{fontSize: 25, marginTop: 20}}>
-                {firebase.auth().currentUser?.phoneNumber }'s profile 
+                {firebase.auth().currentUser?.phoneNumber?firebase.auth().currentUser?.phoneNumber:"login" }'s profile 
             </Text>
+
         </View>
   
 {/*         <Text>Email: {auth.currentUser?.email}'s profile</Text> */}
@@ -221,8 +242,11 @@ return(
                 </TouchableOpacity>
 
                 <View style={styles.text_box}>
-                    <Text style={[styles.setFontSizeThree_white]} >App alternatives</Text>
-                    <Text style={[styles.setFontSizeOne_white]}>{"\n"}1. Register the stolen or abandoned bikes{"\n"}{"\n"}2. Search for bikes in this database </Text>
+                    <Text style={[styles.setFontSizeThree_white]} >App News</Text>
+                    <Text style={[styles.setFontSizeOne_white]}>In app chat comming soon</Text>
+
+{/*                     <Text style={[styles.setFontSizeOne_white]}>{"\n"}1. Register the stolen or abandoned bikes. Preferably with frame number.{"\n"}{"\n"}2. Search in this database before or after you buy a used bike from someone.{"\n"}{"\n"}
+                    3. If the bike is previously stolen, contact the previous owner using this app and then determine whether you should contact the local law enforcement.</Text> */}
     {/*                     <Button title="Press me" onPress={() => Alert.alert('Simple Button pressed')} /> */}
                 </View>
             </ImageBackground >
@@ -234,7 +258,7 @@ return(
 {/* <!------------Rules----------> */}
 <View style={styles.text_box}>
     <Text style={[styles.setFontSizeThree]}>Find bike</Text>
-    <Text> Use the app whenever you buy a used bike to check if it is previously stolen! </Text>
+    <Text> Use the app whenever you buy a used bike to check if it is previously stolen to stop criminal organizations! </Text>
     
 
     <View className="row">
@@ -250,14 +274,12 @@ return(
         <View style={styles.course_row}>
         <TouchableOpacity onPress={handleSearchforBike}>
                 <Text style={[styles.setFontSizeThree]}>Search in database</Text>
-                <Text></Text>
         </TouchableOpacity>
         </View>
 
         <View style={styles.course_row_color}>
         <TouchableOpacity onPress={handleSeeReports}>
                 <Text style={[styles.setFontSizeThree]}>Published reports</Text>
-                <Text></Text>
         </TouchableOpacity>
         </View>
 
@@ -265,18 +287,29 @@ return(
         <TouchableOpacity onPress={handleValuableInfo}>
 
                 <Text style={[styles.setFontSizeThree]}>Valuable Info</Text>
-                <Text></Text>
 
         </TouchableOpacity>
         </View>
         <View style={styles.course_row_color}>
-        <TouchableOpacity onPress={handleAboutUs}>
+            <TouchableOpacity onPress={handleAboutUs}>
 
-                <Text style={[styles.setFontSizeThree]}>About Us</Text>
-                <Text>{"\n"}Very nice button</Text>
+                    <Text style={[styles.setFontSizeThree]}>About Us</Text>
+                    <Text>{"\n"}Very nice button</Text>
 
-        </TouchableOpacity>
+            </TouchableOpacity>
         </View>
+
+        <View style={styles.course_row_color_delete}>
+            <TouchableOpacity onPress={deleteUserAlert}>
+
+                <Text style={[styles.setFontSizeThree_white]}>Delete this account </Text>
+                <Text style={[styles.setFontSizeOne_white]}>(does not include published reports)</Text>
+
+            </TouchableOpacity>
+        </View>
+
+
+
     </View>
 {/* <!--------footer-------> */}
 
@@ -354,6 +387,13 @@ const styles = StyleSheet.create({
         fontSize: 15 // Define font size here in Pixels
         },
 
+    setFontSizeOne_orange: {
+    
+        fontSize: 15, // Define font size here in Pixels
+        color: 'brown',
+
+        },
+
     setFontSizeOne_white: {
         
         fontSize: 15, // Define font size here in Pixels
@@ -387,7 +427,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        image: "./images/skyrimman.jpg",
         position: 'relative',
         marginTop: 14,
     },
@@ -438,6 +477,21 @@ const styles = StyleSheet.create({
         margin: '5%',
         borderRadius: 10,
         backgroundColor: "#e0c3e6",
+        shadowColor: 'rgba(0,0,0, .4)', // IOS
+        shadowOffset: { height: 1, width: 1 }, // IOS
+        shadowOpacity: 1, // IOS
+        shadowRadius: 1, //IOS
+        elevation: 2, // Android
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+
+    },
+    course_row_color_delete: {
+        padding: 20,
+        margin: '5%',
+        borderRadius: 10,
+        backgroundColor: "#533d63",
         shadowColor: 'rgba(0,0,0, .4)', // IOS
         shadowOffset: { height: 1, width: 1 }, // IOS
         shadowOpacity: 1, // IOS

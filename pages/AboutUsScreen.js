@@ -4,12 +4,10 @@ import { TouchableOpacity  } from 'react-native';
 import Navbar from "./Navbar"
 import { Linking } from 'react-native';
 import logo from "./images/logo.jpg";
-import skyrimman from "./images/skyrimman.jpg";
-import Theif from "./images/theif.jpg";
 import { NavigationContainer } from '@react-navigation/native';
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import {useNavigation} from '@react-navigation/core';
-import firebase from "firebase/compat/app";
+/* import firebase from "firebase/compat/app"; */
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/storage";
@@ -21,7 +19,8 @@ import LottieView from "lottie-react-native";
 import {navigation} from "../App.js"
 import { auth } from '../firebase.js'
 import "./bikesapi";
-
+import { setDoc, doc, collection, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import {db, firebase} from "../firebase";
 /* function useChange() {
     const [uploading, setUploading] = React.useState(null);
     function change(value) {
@@ -104,7 +103,61 @@ return(
     </View>
 );
 };
-const phoneNumber = firebase.auth().currentUser?.phonenumber;
+const phoneNumber = firebase.auth().currentUser?.phoneNumber;
+
+
+const [users, setUsers] = useState([]);
+useEffect(() => {
+    const localusers= new Array()
+    firebase.firestore()
+    .collection('feedbacks')
+    // Filter results set to lower case
+    .where('phonenumber', "==", phoneNumber)
+    .get()
+    .then(querySnapshot => {
+
+      querySnapshot.forEach(documentSnapshot => {
+        console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+        const {phonenumber, createdAt} = documentSnapshot.data()
+
+        localusers.push({
+        id: documentSnapshot.id,
+        phonenumber,
+        createdAt,
+      })
+    })
+    })
+  
+    setUsers(localusers)
+    console.log("ok1")
+    console.log(users)
+    
+}, [])
+
+const DeleteFeedback = () => {
+/*     var chatId = users[0].id; // +639266825843
+    var colRef = firebase.firestore()
+      .collection('feedbacks')
+      .doc(users[0].id)
+    colRef.get().then((querySnapshot) => {
+        Promise.all(querySnapshot.docs.map((d) => d.ref.delete()));
+      }); */
+ for (let i=0; i<users.length;i++){
+         console.log(users[i].id)
+      /*  todoRef.doc(users[i].id).delete()  */
+
+/*     let id_to_feedback = users[i].id */
+    deleteDoc(doc(db, "feedbacks", users[i].id), {
+
+    }).then(() => {
+      console.log("data submitted5");
+    }).catch(() => {
+      console.log(error);
+    })
+ }
+ navigation.replace("Profile")  
+ navigation.replace("AboutUs") 
+}
 const PublishFeedback=()=>{
     console.log("ok")
     
@@ -117,27 +170,34 @@ const PublishFeedback=()=>{
     phonenumber: phoneNumber,
     
     };
-    console.log(data)
+
     
-    todoRef
-    .add(data)
-    .then(() => {
-        //release the new field state
-        setFeedback("");
-        //release keyboard
-        Keyboard.dismiss();
+    if (users.length < 4)
+    {
+        console.log(data)
+        console.log(users)
+        todoRef
+        .add(data)
+        .then(() => {
+            //release the new field state
+            setFeedback("");
+            //release keyboard
+            Keyboard.dismiss();
+            Alert.alert("Your feedback has been sent :)")
+        })
 
-    })
+        .catch((error) => {
+            alert(error);
+        })
+    /*         console.log(data) */
+    }
+    else{
+        Alert.alert("Every user can only send four responses!")
+    }
+    navigation.replace("Profile")  
+    navigation.replace("AboutUs") 
 
-    .catch((error) => {
-        alert(error);
-    })
-/*         console.log(data) */
 }
-
-
-
-
     return(
 
 <ScrollView>
@@ -161,7 +221,7 @@ const PublishFeedback=()=>{
 <View style = {styles.campus}>
     
     <Text style={{fontSize:25,}}>About Us</Text>
-    <Text style={{textAlign: "center",}}>{"\n"}Hi!{"\n"} I am happy you're using this app to prevent crimes where bikes are being stolen and then sold back to the victims neighbors.{"\n"}{"\n"}While studying at the university I got three bikes and two bike lights stolen during just three years. That is how I got the idea to make this app.{"\n"}{"\n"}What do you think about this app so far? Please share your thoughts below!</Text>
+    <Text style={{textAlign: "center",}}>{"\n"}Hi!{"\n"} I am happy you're using this app to prevent crimes where bikes are being stolen and then sold back to the victims neighbors. The money then goes to criminal organizations.{"\n"}{"\n"}While studying at the university I got three bikes and two bike lights stolen during just three years. That is how I got the idea to make this app.{"\n"}{"\n"}What do you think about this app so far? Please share your thoughts below!</Text>
 
 </View>
 
@@ -183,6 +243,12 @@ const PublishFeedback=()=>{
           <TouchableOpacity style={styles.sendVerification} onPress={() => PublishFeedback()}>
             <Text style={styles.buttonText}>
                 Publish feedback
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.removeFeedback} onPress={() => DeleteFeedback()}>
+            <Text style={styles.buttonText}>
+                Remove all feedbacks
             </Text>
           </TouchableOpacity>
           
@@ -259,6 +325,14 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#3498db",
     borderRadius: 10,
+    marginBottom: 10,
+    },
+
+    removeFeedback: {
+    padding: 20,
+    backgroundColor: "#3498db",
+    borderRadius: 10,
+    marginBottom: 10,
     },
 
     setFontSizeOne: {
@@ -298,7 +372,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-      image: "./images/skyrimman.jpg",
+
       position: 'relative',
     },
 

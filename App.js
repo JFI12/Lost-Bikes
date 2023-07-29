@@ -13,8 +13,9 @@ import { app } from "./firebase";
 import ProfileScreen from "./pages/profilescreen";
 import LoginScreen from "./pages/signinscreen";
 import UploadBikeScreen from "./pages/uploadBikeScreen";
-import SearchinDataBaseScreen from "./pages/SearchinDataBaseScreen"
+
 import SeePublishedBikesScreen from './pages/seePublishedBikesScreen';
+import SearchinDataBaseScreen from "./pages/SearchinDataBaseScreen"
 import SearchwithCountyScreen from './pages/SearchwithCountyScreen';
 import SearchwithmodelScreen from './pages/SearchwithmodelScreen';
 import SearchwithLocationandModelScreen from "./pages/SearchwithLocationandModelScreen"
@@ -23,6 +24,7 @@ import ValuableInfoScreen from './pages/ValueableInfoScreen';
 import AboutUsScreen from "./pages/AboutUsScreen";
 import { AsyncStorage } from 'react-native';
 import AppLoader from './pages/animations/AppLoader';
+import {registerRootComponent} from 'expo';
 /* import * as SecureStore from 'expo-secure-store'; */
 //import auth from "./pages/firebase"
 /* import * as firebase from "firebase";
@@ -47,10 +49,10 @@ const AuthContext = createContext();
 const retrieve_data = async() => {
   try {
 
-    const data = await AsyncStorage.getItem('keepLoggedIn')
+/*     const data = await AsyncStorage.getItem('keepLoggedIn')
 
         console.log("if true" + data)
-        setisLoggedin(data)
+        setisLoggedin(data) */
 
   }
   catch(error) {}
@@ -59,9 +61,9 @@ const retrieve_data = async() => {
 
 useEffect(()=>{
   setisloading(true)
-  retrieve_data();
+/*   retrieve_data();
   
-  console.log("async" +  AsyncStorage.getItem('keepLoggedIn'))
+  console.log("async" +  AsyncStorage.getItem('keepLoggedIn')) */
   setTimeout(()=> setisloading(false),1000);
 
 },[]);
@@ -101,4 +103,5 @@ useEffect(()=>{
     </>
   );
 }
+
 //navigation.navigate('Profile', { name: 'Jane' })

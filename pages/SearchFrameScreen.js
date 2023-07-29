@@ -9,8 +9,6 @@ import {ImageBackground, Image, SafeAreaView, StatusBar, Button, Alert, TextInpu
 import Navbar from "./Navbar"
 import { Linking } from 'react-native';
 import logo from "./images/logo.jpg";
-import skyrimman from "./images/skyrimman.jpg";
-import Theif from "./images/theif.jpg";
 import { NavigationContainer } from '@react-navigation/native';
 import { getStorage, uploadBytes,ref,getDownloadURL } from "firebase/storage";
 import { onValue, set, update, remove } from "firebase/database";

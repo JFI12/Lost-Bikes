@@ -22,10 +22,10 @@ function hideMenu(){
 function Navbar() {
     return (
         <Fragment>
-            <TouchableOpacity onPress={() =>  navigation.navigate('Profile', { name: 'Jane' })}>
+{/*             <TouchableOpacity onPress={() =>  navigation.navigate('Profile', { name: 'Jane' })}>
               <Image style={styles.tinyLogo} source={(logo)} onPress = {() => Alert.alert('Simple Button pressed')}/>
            
-            </TouchableOpacity>
+            </TouchableOpacity> */}
                 <View className = "nav-links" id="navLinks">
                     <View className="fa fa-times" onClick={hideMenu}></View>
                         <Text style={{color: 'blue'}}

@@ -88,9 +88,9 @@ const checklog=async()=>{
 
     try {
   
-        const data = await AsyncStorage.getItem('keepLoggedIn')
+/*         const data = await AsyncStorage.getItem('keepLoggedIn')
   
-          console.log("if true" + data)
+          console.log("if true" + data) */
 
     }
     catch(error) {}
@@ -127,7 +127,7 @@ useEffect(() => {
 
   const handleLogin = () =>{
     firebase.auth().signInWithEmailAndPassword(email, password).then(userCredentials => {
-      AsyncStorage.setItem("keepLoggedIn", JSON.stringify(true))
+/*       AsyncStorage.setItem("keepLoggedIn", JSON.stringify(true)) */
       const user = userCredentials.user;
 
       console.log('Logged in with: ', user.email);
@@ -204,8 +204,9 @@ const handleValuableInfo = () => {
         <Image style={styles.image} source={require("./images/logo.jpg")} />
 
         <Text style={styles.optText}>
-            Register with SMS
+            Login with SMS
         </Text>
+
         <TextInput
             placeholder="+46 76 070 07 07"
             onChangeText= {setPhoneNumber}
@@ -243,11 +244,36 @@ const handleValuableInfo = () => {
             Confirm verification
         </Text>
     </TouchableOpacity>
-    <Text style={{fontSize:35, marginTop:30,}}>TIP: </Text><Text style={{fontSize:20, marginLeft:10,marginRight:10}}>Use the app whenever you buy a used bike to check if it is previously stolen! {"\n"} </Text>
+    <Text style={{fontSize:35, marginTop:30,}}>Procedure: </Text> 
+
+
 </View>
 <View style={{marginBottom:0, alignItems: "center",  justifyContent:"center", marginLeft:16, marginRight:16,}}>
-<Text>You can find your frame number on your bikes frame. Every bike has one! Bounties may be viable!</Text>
+<Text style={[styles.setFontSizeOne_white]}>{"\n"}1. Register the stolen or abandoned bikes. Preferably with frame number.{"\n"}{"\n"}2. Search in this database before or after you buy a used bike from someone. {"\n"}{"\n"}
+                    3. If the bike is previously stolen, contact the previous owner using this app and then determine whether you should contact the local law enforcement.</Text>
+                    <Text>{"\n"}(The frame number is on the bike's frame!) </Text>
+                    <Text>{"\n"}University students have a 53% change of having one bike stolen. The money then goes to criminal organizations.</Text>
+{/*   <View style={styles.square}>
+    <View style={styles.square_inside}>
+    <Text  style={{fontSize:20, marginLeft:10,marginRight:10}}>You can find your frame number on your bikes frame. Every bike has one! </Text>
+    </View>
+  </View>
+  <View style={styles.square}>
+    <View style={styles.square_inside}>
+    <Text style={{fontSize:20, marginLeft:10,marginRight:10}}>There is a 53% risk for a student to have at least one bike stolen over four years! Using this app for 2 minutes might save you the cost of that bike </Text>
+    </View>
+  </View>
+  <View style={styles.square}>
+    <View style={styles.square_inside}>
+    <Text style={{fontSize:20, marginLeft:10,marginRight:10}}>Use this app whenever you buy a used bike to see if it is previously stolen! </Text>
+       </View>
+  </View> */}
+
 </View>
+
+{/* <View style={{marginBottom:0, alignItems: "center",  justifyContent:"center", marginLeft:16, marginRight:16,}}>
+<Text>You can find your frame number on your bikes frame. Every bike has one! </Text>
+</View> */}
 
 <View style={styles.course_row}>
         <TouchableOpacity onPress={handleSearchforBike}>
@@ -267,8 +293,8 @@ const handleValuableInfo = () => {
         <Button title="Pick Image" onPress={() => pickImage()} style = {{marginTop: 30}}  />
         {image1 && <Image source={{uri: image1}} style={{flex:1/2}}/>}
     </View> */}
-
- {/* <KeyboardAvoidingView style={styles.container} behavior="padding">
+{/* 
+ <KeyboardAvoidingView style={styles.container} behavior="padding">
 <Image style={styles.image} source={require("./images/logo.jpg")} />
 
   <View style={styles.inputView}>
@@ -298,15 +324,15 @@ const handleValuableInfo = () => {
     <Text style={styles.forgot_button}>Forgot Password?</Text>
   </TouchableOpacity>
 
-  <TouchableOpacity style={styles.loginBtn}>
-    <Text style={styles.loginText} onPress={handleLogin} placeholder = "Email" >LOGIN</Text>
+  <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
+    <Text style={styles.loginText} placeholder = "Email" >LOGIN</Text>
   </TouchableOpacity>
 
-  <TouchableOpacity style={[styles.loginBtn, styles.buttonoutline]} >
-    <Text onPress={handleSignup} style={styles.buttonoutlinetext} secureTextEntry>Register</Text>
-  </TouchableOpacity>
+  <TouchableOpacity style={[styles.loginBtn, styles.buttonoutline]} onPress={handleSignup}>
+    <Text  style={styles.buttonoutlinetext} secureTextEntry>Register</Text>
+  </TouchableOpacity> 
 
-  <TouchableOpacity style={styles.tinyLogo} onPress={() => {AsyncStorage.setItem("keepLoggedIn", JSON.stringify(true)),   navigation.replace("Profile")}}>
+ <TouchableOpacity style={styles.tinyLogo} onPress={() => {AsyncStorage.setItem("keepLoggedIn", JSON.stringify(true)),   navigation.replace("Profile")}}>
   
     <Image source={logo} resizeMode="stretch" style={styles.text_box_white}/>
  
@@ -316,8 +342,8 @@ const handleValuableInfo = () => {
 </View>
 
 
-</KeyboardAvoidingView>  */}
-
+</KeyboardAvoidingView>  
+  */}
   
 
 </ScrollView>
@@ -507,5 +533,26 @@ sendVerification: {
 
 },
 
+square: {
+  padding: 5,
+  marginBottom: 20,
+  borderRadius: 10,
+  backgroundColor: "#3498db",
+
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'row',
+
+},
+square_inside: {
+  margin: 5,
+  padding: 5,
+  backgroundColor: "white",
+  borderRadius: 20,
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'row',
+
+},
 
 });

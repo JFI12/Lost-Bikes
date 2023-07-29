@@ -8,8 +8,6 @@ import {ImageBackground, Image, SafeAreaView, StatusBar, Button, Alert, TextInpu
 import Navbar from "./Navbar"
 import { Linking } from 'react-native';
 import logo from "./images/logo.jpg";
-import skyrimman from "./images/skyrimman.jpg";
-import Theif from "./images/theif.jpg";
 import { NavigationContainer } from '@react-navigation/native';
 import { getStorage, uploadBytes, getDownloadURL, connectStorageEmulator,ref } from "firebase/storage";
 import { onValue, set, update, remove } from "firebase/database";
@@ -133,15 +131,12 @@ console.log(framenumberitemindex)
 
       navigation.replace("Profile")  
       navigation.replace("SeeReports") 
-
-
 } 
 
 
 
 
 function renderPosts({item, index}) {
-
 
     console.log("wholeusersimages" + usersimages)
     console.log("userimage" + usersimages[index])

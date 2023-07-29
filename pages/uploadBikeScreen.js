@@ -8,8 +8,6 @@ import {ImageBackground, Image, SafeAreaView, StatusBar, Button, Alert, TextInpu
 import Navbar from "./Navbar"
 import { Linking } from 'react-native';
 import logo from "./images/logo.jpg";
-import skyrimman from "./images/skyrimman.jpg";
-import Theif from "./images/theif.jpg";
 import { NavigationContainer } from '@react-navigation/native';
 import { getStorage, uploadBytes, getDownloadURL, connectStorageEmulator,ref } from "firebase/storage";
 import { onValue, set, update, remove, refFromURL } from "firebase/database";
@@ -528,6 +526,21 @@ function renderPosts({item, index}) {
 
 
 
+
+          <View style={{ width: "80%", justifyContent: "center", alignItems: "center" }}>
+
+            <Text>To really prevent bike thefts report the lost bike to the local law enforcement aswell</Text>
+          </View>
+            <View style={styles.buttoncontainer}>
+              <TouchableOpacity style={styles.selectButton} onPress={() => Linking.openURL("https://etjanster.polisen.se/eanmalan/stold/anmalareenkel")}>
+                <Text style={styles.buttonText}>Go to the police website</Text>
+              </TouchableOpacity>
+
+          </View>
+
+        <View style={{marginBottom: 10, width: "80%" }}>
+          <Text>Users are contacted through their phones. (In app chat comming soon!) </Text>
+        </View>
 
         <View style={styles.inputView}>
           <TextInput
