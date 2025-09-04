@@ -1,7 +1,9 @@
-# lostbikes.se
+# lostbikes.se (open for collaborations)
 
 🚲 A simple service to help prevent bike theft and buying stolen bikes.  
 Visit: [lostbikes.se](https://lostbikes.se)
+
+📄 [Download Poster (PDF)](./poster_with_qr.pdf)
 
 ---
 
